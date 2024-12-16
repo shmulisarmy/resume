@@ -194,6 +194,22 @@
             .content img {
                 margin-bottom: 20px;
             }
+            .images{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    background-color: var(--background-color);
+                    color: var(--color);
+                    
+            }
+
+                .images > :nth-child(n+3) {
+                    display: none;
+                }
+
+            
             
         }
 
