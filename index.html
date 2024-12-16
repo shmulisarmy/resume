@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Name]'s Resume</title>
+    <script>
+        function scroll_and_focus(element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            element.focus();
+        }
+        window.onbeforeprint = function() {
+            document.body.classList.add('printing');
+        };
+
+        window.onafterprint = function() {
+            document.body.classList.remove('printing');
+        };
+
+    </script>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0778a3 1px solid;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            text-align: center;
+            font-size: 2.5em;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .content img {
+            max-width: 150px;
+            border-radius: 50%;
+        }
+        .experience-section {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #0778a3;
+        }
+        .experience-section ul {
+            list-style-type: none;
+            /* padding: 0; */
+        }
+        .experience-section li {
+            margin-bottom: 10px;
+            list-style: disc;
+        }
+        .highlight {
+            background-color: #222;
+            color: #fff;
+            padding: 10px;
+            margin: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+        }
+        .job{
+            margin-bottom: 60px;
+        }
+        .job-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #0778a3;
+            line-height: 10px;
+
+        }
+        .date {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            margin-bottom: 100px;
+            font-size: large;
+        }
+
+        li{
+            /* transition: .5s; */
+        }
+
+        *:focus:not(button) {
+            padding: 16px;
+            font-size: 1.2em;
+            outline: 2px solid purple;
+        }
+        .printing button{
+            display: none;
+        }
+
+        button{
+            background-color: #0778a3;
+            color: white;
+            padding: 4px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .controls{
+            margin-left: 10px;
+        }
+        header h1, img{
+            transition: .5s;
+        }
+        @starting-style{
+            header h1, img{
+                transform: scale(0.5);
+            }
+        }
+        .images{
+            margin: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        img:focus{
+            outline: 2px solid #0778a3;      
+            background-color: white;
+            padding: 0;
+            transform: scale(1.6);
+            z-index: 2;
+        }
+
+        .images:focus-within :not(:focus){
+            filter: blur(4px);
+        }
+        .add-image-button{
+            width: 100px;
+            height: 100px;
+            font-size: 3em;
+            margin: 0;
+        }
+        button[type="edit"]{
+            display: none;
+        }
+
+        [contenteditable] [type="edit"]{
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body >
+    <header>
+        <div class="container">
+            <h1>[Your Name]'s Resume</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <div class="left-content">
+                <h2>Contact Information</h2>
+                <p><strong>[Your Name]</strong></p>
+                <p>Phone: [Your Phone Number]</p>
+                <p>Email: [Your Email]</p>
+                <p>LinkedIn: [LinkedIn URL]</p>
+                <p>Portfolio: [Portfolio URL]</p>
+            </div>
+            <div class="right-content">
+                <img src="images/profile.png" alt="Placeholder Image">
+                <p>[Your Name]</p>
+                <p>[Your Job Title]</p>
+            </div>
+        </div>
+
+        <div class="experience-section">
+            <h2>Experience</h2>
+
+            <div  class="job">
+                <div class="job-title">
+                    <span>Chef / Food Truck / Mobile Restaurant Supervisor</span><br>
+                </div>
+                    <span class="date"><em>June 2023 – Present</em></span>
+                <ul>
+                    <li tabindex="0">Worked as a member of the culinary team for a high-volume mobile kitchen, contributing to the preparation and service of diverse menu items.</li>
+                    <li tabindex="0">Prepared and plated daily menu offerings, ensuring food quality, flavor, and presentation met high standards.</li>
+                    <li tabindex="0">Assisted with kitchen staff management, maintaining cleanliness, food safety, and proper sanitation protocols.</li>
+                    <li tabindex="0">Contributed to managing inventory, ordering, and ingredient storage, ensuring cost-effective sourcing.</li>
+                    <li tabindex="0">Collaborated with the customer service team to ensure guest satisfaction and receive valuable feedback.</li>
+                    <li tabindex="0">Assisted in catering events and high-volume services, including large gatherings and weddings.</li>
+                </ul>
+                <div class="images">
+                    <img tabindex="0" width="100" height="100" src="images/rolling-kosher/2.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/rolling-kosher/3.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/rolling-kosher/1.jpeg" alt="">
+                    <!-- <img tabindex="0" width="100" height="100" src="images/rolling-kosher/4.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/rolling-kosher/5.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/rolling-kosher/6.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/rolling-kosher/7.jpeg" alt=""> -->
+                    <button
+                    type="edit"
+                    class="add-image-button"
+                    onclick="const image_url = prompt('Enter the URL of the image you want to add:');
+                    this.closest('.images').innerHTML += `<img tabindex='0' width='100' height='100' src='${image_url}' alt=''>`;">
+                    +</button>
+
+                </div>
+                <!-- Highlight section below -->
+                <div class="highlight">
+                     Contributed to the successful catering of a **300-person wedding**, ensuring smooth food preparation and service.
+                </div>
+            <!-- <button onclick="window.scrollTo({ top: document.getElementById('job2').scrollTop, behavior: 'smooth' })">Next</button> -->
+             <div class="controls">
+
+                 <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
+                 <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                </div>
+            </div>
+
+            <div tabindex="0" id="job2" class="job">
+                <div class="job-title">
+                    <span>Sales Associate / Seasonal Esrog Store</span><br>
+                </div>
+                <span class="date"><em>September 2022 – October 2022</em></span>
+                <ul>
+                    <li tabindex="0">Provided expert advice and assistance in selecting etrogim (citron fruits) and other Sukkot-related products for customers.</li>
+                    <li tabindex="0">Assisted customers in making informed decisions, ensuring they received the best products for their needs.</li>
+                    <li tabindex="0">Handled transactions, including cash and credit, ensuring accuracy and customer satisfaction.</li>
+                    <li tabindex="0">Maintained store organization, ensuring products were fresh and properly displayed throughout the season.</li>
+                    <li tabindex="0">Ensured high-quality customer service and a welcoming atmosphere for all shoppers.</li>
+                </ul>
+                <div class="images">
+                    <img tabindex="0" width="100" height="100" src="images/esrogim/1.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/esrogim/2.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/esrogim/3.jpeg" alt="">
+                    <!-- <img tabindex="0" width="100" height="100" src="images/esrogim/4.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/esrogim/5.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/esrogim/6.jpeg" alt="">
+                    <img tabindex="0" width="100" height="100" src="images/esrogim/7.jpeg" alt=""> -->
+
+                </div>
+                <!-- Highlight section below -->
+                <div class="highlight">
+                     Successfully assisted a customer in purchasing **seven etrogim**, demonstrating strong product knowledge and customer service.
+                </div>
+                <div class="controls">
+
+                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
+                    <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-title">
+                    <span>Founder / Owner / Monsey-Grown Hoshinos Sales Business</span><br>
+                </div>
+                <span class="date"><em>2014 – 2020</em></span>
+                <ul>
+                    <li tabindex="0">Founded and operated a seasonal business selling Monsey-grown hoshinos (dried fruit) door-to-door during an annual one-night event.</li>
+                    <li tabindex="0">Successfully managed all aspects of the business, including inventory, pricing, and financial tracking.</li>
+                    <li tabindex="0">Developed and executed marketing strategies that drove sales through local outreach and word-of-mouth.</li>
+                    <li tabindex="0">Engaged with customers to ensure satisfaction and foster long-term relationships for repeat business.</li>
+                    <li tabindex="0">Handled all cash and credit transactions, ensuring accuracy and positive customer interactions.</li>
+                </ul>
+                <!-- Highlight section below -->
+                <div class="highlight">
+                <span class="highlight-tag">
+
+                    
+                </span>
+                     Achieved a **$460 profit** in a single night, demonstrating strong sales, customer engagement, and product knowledge.
+                </div>
+                <div class="controls">
+
+                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
+                    <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-title">
+                    <span>Private Chef / Dialysis Diet Specialist</span><br>
+                </div>
+                <span class="date"><em>January 2021 – Present</em></span>
+                <ul>
+                    <li tabindex="0">Prepared customized, nutritious meals in adherence to a strict dialysis diet, ensuring dietary restrictions were met while maintaining high standards of flavor and presentation.</li>
+                    <li tabindex="0">Worked closely with my brother to develop and modify meal plans, ensuring they met health needs and taste preferences.</li>
+                    <li tabindex="0">Managed meal planning, ingredient sourcing, and food preparation to create balanced meals for a dialysis patient.</li>
+                    <li tabindex="0">Acquired knowledge of kidney disease-related dietary restrictions, including managing sodium, potassium, and protein intake.</li>
+                    <li tabindex="0">Ensured the meals were both diet-compliant and enjoyable, providing tailored culinary experiences for my brother's health.</li>
+                </ul>
+                <!-- Highlight section below -->
+                <div class="highlight">
+                     Successfully prepared a wide range of **dialysis-compliant meals**, creating enjoyable dishes that catered to strict dietary requirements.
+                </div>
+                <div class="controls">
+
+                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
+                    <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="references-section">
+            <h2>References</h2>
+            <p>Available upon request or:</p>
+            <p><strong>[Boss's Name]</strong></p>
+            <p>[Boss's Position]</p>
+            <p>[Company Name]</p>
+            <p>Phone: [Boss's Phone Number]</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 [Your Name]. All rights reserved.</p>
+    </footer>
+</body>
+</html>
