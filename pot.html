@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #projects {
+            margin: 10%;
+                display: grid;    
+                grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+                
+            
+        }
+        iframe{
+            border: none;
+        }
+        .project{
+            border: 4px solid #0778a3;
+            padding: 10px;
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+        .project button{
+            background-color: #0778a3;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .project .header{
+            display: flex;
+            align-items: center;
+
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+        }
+        .languages{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+
+            .language-item{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin: 10px;
+                img{
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+            .language-item:hover{
+                background-color: #0778a3;
+                color: #fff;
+                border-radius: 10px;
+                padding: 10px;
+            }
+        }
+    </style>
+
+    <script>
+        const language_images = {
+            JavaScript: "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
+            HTML: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
+            CSS: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
+            Python: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+            TypeScript: "https://upload.wikimedia.org/wikipedia/commons/4/4c/TypeScript_logo_2020.svg",
+ }
+        const github_owner = "shmulisarmy";
+
+        /**
+         * @param {HTMLElement} element
+         * @param {string[]} languages
+         */
+        function render_languages(element, languages) {
+            const languagesContainer = element.querySelector('.languages');
+            console.log({languages});
+            const total_chars = Object.values(languages).reduce((total, amount) => total + amount, 0);
+            languagesContainer.replaceChildren(...Object.entries(languages).map(([language, amount], index) => {
+                const languageElement = document.createElement('div');
+                languageElement.classList.add('language-item');
+                console.log({language});
+                const languageImage = document.createElement('img');
+                languageImage.src = language_images[language] || "https://upload.wikimedia.org/wikipedia/commons/a/a7/Question_mark_white.svg";
+                languageImage.alt = language;
+                languageImage.width = 40;
+                languageImage.height = 40;
+                languageImage.style.marginRight = "5px";
+
+
+                languageElement.appendChild(languageImage);
+                languageElement.appendChild(languageImage);
+
+
+
+                const percentage = (amount / total_chars) * 100;
+                const tag = document.createElement('span');
+                tag.textContent = `${language}: ${percentage.toFixed(0)}%`;
+                languageElement.appendChild(tag);
+
+
+                
+                return languageElement;
+            }));
+            
+        }
+        function render_project(element) {
+            const dataset = element.dataset;
+            console.log(dataset);
+            
+            const apiUrl = `https://api.github.com/repos/${github_owner}/${dataset.repo_name}/contents/README.md`;
+            const languagesApiUrl = `https://api.github.com/repos/${github_owner}/${dataset.repo_name}/languages`;
+
+            console.log("languagesApiUrl", languagesApiUrl);
+
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const readmeContent = atob(data.content); // Decoding base64 to text
+
+                console.log(readmeContent);
+
+                const url = extractUrlFromText(readmeContent);
+                const imageUrl = extractImageUrlFromText(readmeContent);
+
+                element.innerHTML = `
+                <div class="header">
+                    <img src="${imageUrl}">
+                    <h1>${dataset.repo_name}</h1>
+                    <a style="text-decoration: none; color: #0778a3; font-weight: bold; margin-left: 10px" href="${url}" target="_blank">Open in new tab 
+                        <span  style="font-size: 30px; color: #0778a3; underline: none; font-weight: bold">↗</span>
+                        
+                        </a>
+                </div>
+                    <iframe width="100%" height="400" src="${url}"></iframe>
+                    <button onclick="this.clospansest('.project').querySelector('iframe').requestFullscreen()">fullscreen</button>
+                    <marquee>
+                        <div class="languages"></div>
+                        </marquee>
+
+                    `; 
+                    
+            })
+            .catch(error => console.error('Error fetching the README:', error));
+
+            fetch(languagesApiUrl)
+            .then(response => response.json())
+            .then(languages => {
+                render_languages(element, languages);
+            })
+            .catch(error => console.error('Error fetching languages:', error));
+        }
+
+
+        function extractUrlFromText(text) {
+    const urlIndex = text.indexOf("url:");
+
+    if (urlIndex === -1) {
+        return null; 
+    }
+
+    const urlText = text.substring(urlIndex + 4).trim(); // +4 to skip "url:"
+
+    const newlineIndex = urlText.indexOf("\n");
+
+    const url = newlineIndex !== -1 ? urlText.substring(0, newlineIndex) : urlText;
+
+    return url;
+}
+function extractImageUrlFromText(text) {
+    const urlIndex = text.indexOf("](");
+
+    if (urlIndex === -1) {
+        return null; 
+    }
+
+    const urlText = text.substring(urlIndex + "](".length).trim(); // +4 to skip "url:"
+
+    const newlineIndex = urlText.indexOf(")");
+
+    const imageUrl = newlineIndex !== -1 ? urlText.substring(0, newlineIndex) : urlText;
+
+    return imageUrl;
+}
+
+
+
+    </script>
+</head>
+<body>
+    <div id="projects">
+
+        <div  data-repo_name="resume" class="project"></div>
+        <div  data-repo_name="typing-challenger" class="project"></div>
+        <div  data-repo_name="resume" class="project"></div>
+        <div  data-repo_name="resume" class="project"></div>
+    </div>–
+
+    <script>
+        document.querySelectorAll('.project').forEach(project => render_project(project));
+    </script>
+
+</body>
+</html>

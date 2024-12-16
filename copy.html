@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Dark Mode Portfolio</title>
+    <style>
+        /* Global Styles */
+        body {
+            background-color: black;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+        }
+
+        #projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            z-index: 2; /* Ensure projects are visible above background */
+            position: relative;
+        }
+
+        /* Matrix Background Styles */
+        matrix-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Behind the project cards */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .matrix-char {
+            position: fixed;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            white-space: nowrap;
+            user-select: none;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { top: -20px; opacity: 0.5; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Project Card Styles */
+        project-card {
+            display: block;
+            border: 4px solid #0778a3;
+            padding: 10px;
+            margin: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #0778a3;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Project Languages Styles */
+        project-languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .language-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .language-item img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <matrix-background></matrix-background>
+
+    <div id="projects">
+        <!-- Example Project Cards -->
+        <project-card repo-name="resume"></project-card>
+        <project-card repo-name="typing-challenger"></project-card>
+        <project-card repo-name="portfolio-project"></project-card>
+        <project-card repo-name="js-syntax-checker"></project-card>
+    </div>
+
+    <script type="module">
+        // Language Images Mapping
+        const LANGUAGE_IMAGES = {
+            JavaScript: "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
+            HTML: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
+            CSS: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
+            Python: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+            TypeScript: "https://upload.wikimedia.org/wikipedia/commons/4/4c/TypeScript_logo_2020.svg",
+        };
+
+        const GITHUB_OWNER = "shmulisarmy";
+
+        // Matrix Background Component
+        class MatrixBackground extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+            }
+
+            connectedCallback() {
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: 1;
+                            pointer-events: none;
+                            overflow: hidden;
+                        }
+                        .matrix-char {
+                            position: fixed;
+                            color: #0f0;
+                            font-family: 'Courier New', monospace;
+                            font-size: 18px;
+                            white-space: nowrap;
+                            user-select: none;
+                            opacity: 0;
+                            animation: fall linear infinite;
+                        }
+                        @keyframes fall {
+                            0% { top: -20px; opacity: 0.5; }
+                            100% { top: 100%; opacity: 0; }
+                        }
+                    </style>
+                `;
+                this.createMatrixEffect();
+            }
+
+            createMatrixEffect() {
+                const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-∆˙©∂˜˙µ˙∆ß∆©˙∂©∂∫√";
+                const columns = Math.floor(window.innerWidth / 20);
+                const rows = Math.floor(window.innerHeight / 30);
+
+                for (let i = 0; i < columns; i++) {
+                    if (i % 2 === 0) continue;
+                    for (let j = 0; j < rows; j++) {
+                        if (j % 2 === 0) continue;
+                        const charElement = document.createElement('span');
+                        charElement.textContent = chars.charAt(Math.floor(Math.random() * chars.length));
+                        charElement.classList.add('matrix-char');
+                        charElement.style.left = `${i * 20}px`;
+                        charElement.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                        this.shadowRoot.appendChild(charElement);
+                    }
+                }
+            }
+        }
+        customElements.define('matrix-background', MatrixBackground);
+
+        // Project Languages Component
+        class ProjectLanguages extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+            }
+
+            connectedCallback() {
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            align-items: center;
+                        }
+                        .language-item {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                        }
+                        .language-item img {
+                            width: 50px;
+                            height: 50px;
+                        }
+                    </style>
+                    <slot></slot>
+                `;
+            }
+
+            renderLanguages(languages) {
+                const total_chars = Object.values(languages).reduce((total, amount) => total + amount, 0);
+                
+                this.replaceChildren(...Object.entries(languages).map(([language, amount]) => {
+                    const languageElement = document.createElement('div');
+                    languageElement.classList.add('language-item');
+
+                    const languageImage = document.createElement('img');
+                    languageImage.src = LANGUAGE_IMAGES[language] || "https://upload.wikimedia.org/wikipedia/commons/a/a7/Question_mark_white.svg";
+                    languageImage.alt = language;
+
+                    const percentageSpan = document.createElement('span');
+                    const percentage = (amount / total_chars) * 100;
+                    percentageSpan.textContent = `${language}: ${percentage.toFixed(0)}%`;
+
+                    languageElement.appendChild(languageImage);
+                    languageElement.appendChild(percentageSpan);
+
+                    return languageElement;
+                }));
+            }
+        }
+        customElements.define('project-languages', ProjectLanguages);
+
+        // Project Card Component
+        class ProjectCard extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+            }
+
+            connectedCallback() {
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        :host {
+                            display: block;
+                            border: 4px solid #0778a3;
+                            padding: 10px;
+                            margin: 10px;
+                            background-color: rgba(0, 0, 0, 0.8);
+                            border-radius: 10px;
+                            color: #0f0;
+                            font-family: 'Courier New', monospace;
+                        }
+                        .header {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 10px;
+                        }
+                        .header img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                        }
+                        iframe {
+                            width: 100%;
+                            height: 400px;
+                            border: none;
+                        }
+                        .controls {
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 10px 0;
+                        }
+                        button {
+                            background-color: #0778a3;
+                            color: #fff;
+                            padding: 5px 10px;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+                    </style>
+                    <div class="header">
+                        <img id="project-image">
+                        <h1 id="project-title"></h1>
+                    </div>
+                    <iframe id="project-iframe"></iframe>
+                    <div class="controls">
+                        <a id="project-link" href="#">Open in new tab</a>
+                        <button id="fullscreen-btn">Fullscreen</button>
+                    </div>
+                    <project-languages id="project-languages"></project-languages>
+                `;
+
+                const fullscreenBtn = this.shadowRoot.getElementById('fullscreen-btn');
+                const iframe = this.shadowRoot.getElementById('project-iframe');
+                fullscreenBtn.addEventListener('click', () => iframe.requestFullscreen());
+
+                this.renderProject();
+            }
+
+            renderProject() {
+                const repoName = this.getAttribute('repo-name');
+                
+                // Fetch README and render project details
+                fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${repoName}/contents/README.md`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const readmeContent = atob(data.content);
+                        const url = this.extractUrlFromText(readmeContent);
+                        const imageUrl = this.extractImageUrlFromText(readmeContent);
+
+                        this.shadowRoot.getElementById('project-title').textContent = repoName;
+                        this.shadowRoot.getElementById('project-image').src = imageUrl;
+                        this.shadowRoot.getElementById('project-iframe').src = url;
+                        this.shadowRoot.getElementById('project-link').href = url;
+                    })
+                    .catch(error => console.error('Error fetching README:', error));
+
+                // Fetch languages and render
+                fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${repoName}/languages`)
+                    .then(response => response.json())
+                    .then(languages => {
+                        const languagesElement = this.shadowRoot.getElementById('project-languages');
+                        languagesElement.renderLanguages(languages);
+                    })
+                    .catch(error => console.error('Error fetching languages:', error));
+            }
+
+            extractUrlFromText(text) {
+                const urlIndex = text.indexOf("url:");
+                if (urlIndex === -1) return null;
+                const urlText = text.substring(urlIndex + 4).trim();
+                const newlineIndex = urlText.indexOf("\n");
+                return newlineIndex !== -1 ? urlText.substring(0, newlineIndex) : urlText;
+            }
+
+            extractImageUrlFromText(text) {
+                const urlIndex = text.indexOf("](");
+                if (urlIndex === -1) return null;
+                const urlText = text.substring(urlIndex + "](".length).trim();
+                const newlineIndex = urlText.indexOf(")");
+                return newlineIndex !== -1 ? urlText.substring(0, newlineIndex) : urlText;
+            }
+        }
+        customElements.define('project-card', ProjectCard);
+    </script>
+
+</body>
+</html>
