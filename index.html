@@ -33,7 +33,6 @@
         .container {
             width: 80%;
             margin: auto;
-            overflow: hidden;
         }
         header {
             background: #333;
@@ -56,7 +55,7 @@
             max-width: 150px;
             border-radius: 50%;
         }
-        .experience-section {
+        main.experience-section {
             background: #fff;
             padding: 20px;
             border: 1px solid #ccc;
@@ -173,6 +172,27 @@
             display: block;
         }
 
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+                margin: 0;
+                padding: 0;
+            }
+            main.experience-section{
+                margin: 0;
+                margin: 0;
+                width: 100%;
+            }
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .content img {
+                margin-bottom: 20px;
+            }
+            
+        }
+
 
     </style>
 </head>
@@ -200,7 +220,7 @@
             </div>
         </div>
 
-        <div class="experience-section">
+        <main class="experience-section">
             <h2>Experience</h2>
 
             <div  class="job">
@@ -326,7 +346,7 @@
                     <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
                 </div>
             </div>
-        </div>
+        </main>
 
         <div class="references-section">
             <h2>References</h2>
