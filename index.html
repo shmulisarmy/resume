@@ -210,8 +210,13 @@
                     display: none;
                 }
 
+            .content{
+                width: 100%;
+            }
             
-            
+        }
+        a{
+            color: #0778a3;
         }
 
 
@@ -225,14 +230,14 @@
     </header>
 
     <div class="container">
-        <div  style="padding: 20px; background: rgb(197, 195, 195);" class="content">
+        <div  style="padding: 20px; background: rgb(197, 195, 195); " class="content">
             <div class="left-content">
                 <h2>Contact Information</h2>
                 <p>name: <strong>Shmuli Keller</strong></p>
                 <p><span>📞</span> <a href="tel:574-329-1927">574-329-1927</a></p>
                 <div style="display: flex; gap: 10px;">
                     <img width="20" src="images/gmail-icon.png" alt=""> 
-                <a href="mailto:shmulikeller@gmail.com?subject=Resume&body=Hello, i would like to talk to you regarding a position...">shmulikeller@gmail.com</a>
+                <a href="mailto:shmulikeller@gmail.com?subject=Resume&body=Hello, i would like to talk to you regarding an available position...">shmulikeller@gmail.com</a>
 
                 </div>
                 <!-- <p>LinkedIn: [LinkedIn URL]</p>
@@ -248,7 +253,7 @@
         <main class="experience-section">
             <h2>Experience</h2>
 
-            <div  class="job">
+            <div  tabindex="0" class="job">
                 <div class="job-title">
                     <span>Chef / Food Truck / Mobile Restaurant Supervisor</span><br>
                 </div>
@@ -288,12 +293,12 @@
             <!-- <button onclick="window.scrollTo({ top: document.getElementById('job2').scrollTop, behavior: 'smooth' })">Next</button> -->
              <div class="controls">
 
-                 <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                  <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                 <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                 </div>
             </div>
 
-            <div tabindex="0" id="job2" class="job">
+            <div tabindex="0" id="job2" tabindex="0" class="job">
                 <div class="job-title">
                     <span>Sales Associate / Seasonal Esrog Store</span><br>
                 </div>
@@ -324,12 +329,12 @@
                 </div>
                 <div class="controls">
 
-                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                     <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                 </div>
             </div>
 
-            <div class="job">
+            <div tabindex="0" class="job">
                 <div class="job-title">
                     <span>Founder / Owner / Monsey-Grown Hoshinos Sales Business</span><br>
                 </div>
@@ -351,12 +356,12 @@
                 </div>
                 <div class="controls">
 
-                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                     <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                 </div>
             </div>
 
-            <div class="job">
+            <div tabindex="0" class="job">
                 <div class="job-title">
                     <span>Private Chef / Dialysis Diet Specialist</span><br>
                 </div>
@@ -374,8 +379,8 @@
                 </div>
                 <div class="controls">
 
-                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                     <button onclick="scroll_and_focus(this.closest('.job').previousElementSibling)">Previous</button>
+                    <button onclick="scroll_and_focus(this.closest('.job').nextElementSibling)">Next</button>
                 </div>
             </div>
         </main>
