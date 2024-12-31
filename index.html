@@ -17,6 +17,15 @@
             document.body.classList.remove('printing');
         };
 
+
+        window.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            //unfocus the currently focused element
+            document.activeElement.blur();
+        }
+        });
+
+
         function copyText(text) {
             navigator.clipboard.writeText(text);
         }
