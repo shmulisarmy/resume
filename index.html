@@ -198,7 +198,6 @@
             }
             main.experience-section{
                 margin: 0;
-                margin: 0;
                 width: 100%;
             }
             .content {
@@ -244,6 +243,13 @@
             width: 200px;
             display: none;
             transition: .5s;
+
+
+            button{
+                position: absolute;
+                top: 5%;
+                right: 5%;
+            }
         }
         @media screen and (min-width: 600px) {
             .content:hover .info{
@@ -475,6 +481,86 @@
             <p>[Boss's Position]</p>
             <p>[Company Name]</p>
             <p>Phone: [Boss's Phone Number]</p>
+        </div>
+    </div>
+
+    <style>
+        .skills {
+            margin: 20px 0;
+        }
+        .skills li {
+            margin-bottom: 15px;
+            position: relative;  /* For proper positioning of description */
+        }
+        .skill-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-left: 20px;
+            font-style: italic;
+            opacity: 0;
+            height: 0;
+            transform: scale(0.5);
+            overflow: hidden;
+            transition: all 0.8s ease;
+        }
+
+        .skill-description:hover, .skill-description:focus {
+            transition: 10s;
+        }
+        
+        /* Show description on hover or focus */
+        .skills li:hover .skill-description,
+        .skills li:focus-within .skill-description {
+            opacity: 1;
+            height: auto;
+            transform: scale(1);
+            margin-top: 5px;
+        }
+    </style>
+
+    <div style="border: 1px solid black; background-color: white; padding: 10px;" class="container">
+        <h1>Skills</h1>
+        <ul class="skills">
+            <li tabindex="0">python
+                <div class="skill-description">for prototyping, testing ideas, and building small projects</div>
+            </li>
+            <li tabindex="0">Golang
+                <div class="skill-description">The language i will use to build high performance, scalable, secure and reliable applications (as i get more backend/server side experience)</div>
+            </li>
+            <li tabindex="0">HTML
+                <div class="skill-description">Building structured and semantic web pages</div>
+            </li>
+            <li tabindex="0">CSS
+                <div class="skill-description">Creating responsive and visually appealing designs</div>
+            </li>
+            <li tabindex="0">JavaScript
+                <div class="skill-description">Implementing interactive and dynamic web functionality</div>
+            </li>
+            <li tabindex="0">React and solid js
+                <div class="skill-description">Building modern, component-based user interfaces</div>
+            </li>
+            <li tabindex="0">Node.js, npm and vite
+                <div class="skill-description">as a tool to build web applications with react and solid js and to add typescript support</div>
+            </li>
+            <li tabindex="0">PostgreSQL
+                <div class="skill-description">Handling advanced database operations and transactions</div>
+            </li>
+            <li tabindex="0">Sqlite
+                <div class="skill-description">Simple, lightweight, and easy-to-use database for small projects</div>
+            </li>
+            <li tabindex="0">Accessability
+                <div class="skill-description">Creating simple and intuitive user interfaces, for example you'll find on this page that if you press tab you can easily navigate through the page, the info by "Contact Information" is easily copyable and clicking on an image not focuses it but also will blur the images beside it</div>
+            </li>
+            <li tabindex="0">Security
+                <div class="skill-description">designing systems where every piece of important data is accounted for</div>
+            </li>
+        </ul>
+    </div>
+
+     <div style="border: 1px solid black; background-color: white;" class="container"></div>
+        <div class="controls">
+            <h1>Print</h1>
+            <button onclick="window.print()">Print</button>
         </div>
     </div>
 
